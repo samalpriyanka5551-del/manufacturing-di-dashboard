@@ -1,7 +1,0 @@
--- Top 5 Defective Machines Dashboard Query
-WITH defect_summary AS (
-  SELECT machine_id, SUM(defects) as total_defects FROM production_logs GROUP BY machine_id
-)
-SELECT m.machine_name, d.total_defects, RANK() OVER (ORDER BY total_defects DESC) as defect_rank 
-FROM defect_summary d 
-JOIN machines m ON d.machine_id = m.machine_id LIMIT 5;
